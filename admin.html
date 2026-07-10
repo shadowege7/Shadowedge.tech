@@ -36,13 +36,32 @@
       .status-pill { display: inline-block; padding: 0.2rem 0.6rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }
       .status-pill.ready { background: rgba(60,180,100,0.15); color: #1f7a44; }
       .status-pill.missing { background: rgba(200,60,60,0.15); color: #a3312f; }
+      .auth-gate { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 1.5rem; }
+      .auth-card { background: var(--surface); border: 1px solid var(--border); border-radius: 1rem; box-shadow: var(--shadow); padding: 2rem; max-width: 360px; width: 100%; text-align: center; }
+      .auth-card h1 { font-size: 1.25rem; margin: 0 0 1rem; }
+      .auth-card input { width: 100%; padding: 0.7rem 0.85rem; border: 1px solid var(--border); border-radius: 0.6rem; box-sizing: border-box; margin-bottom: 0.75rem; font-size: 0.95rem; }
+      .auth-error { color: #a3312f; font-size: 0.85rem; min-height: 1.2em; margin: 0 0 0.5rem; }
+      .hidden { display: none !important; }
     </style>
   </head>
   <body>
-    <div class="admin-shell">
+    <div class="auth-gate" id="authGate">
+      <div class="auth-card">
+        <h1>ShadowEdge Blog Admin</h1>
+        <p class="admin-hint" style="margin-top:0;">Sign in to continue.</p>
+        <input type="text" id="gateUsername" placeholder="Email" autocomplete="username" />
+        <input type="password" id="gatePassword" placeholder="Password" autocomplete="current-password" />
+        <p class="auth-error" id="gateError"></p>
+        <button class="btn btn-primary" id="gateSubmit" style="width:100%;">Unlock</button>
+      </div>
+    </div>
+    <div class="admin-shell hidden" id="adminShell">
       <div class="admin-header">
         <h1>ShadowEdge Blog Admin</h1>
-        <a href="/" class="btn btn-secondary btn-small">View live site</a>
+        <div class="admin-row">
+          <a href="/" class="btn btn-secondary btn-small">View live site</a>
+          <button class="btn btn-secondary btn-small" id="logoutBtn">Log out</button>
+        </div>
       </div>
 
       <div class="admin-panel">
@@ -127,12 +146,109 @@
       const BRANCH = 'main';
       const TOKEN_KEY = 'shadowedge_admin_token';
 
+      // --- Password gate (deterrent only — see admin security notes) ---
+      const USERNAME = 'cody@shadowedge.tech';
+      const PASSWORD_HASH = 'f930cd51434f0fede0f4a1a0e16fa88011b85850f8fad8d429c2d201f68a843f';
+      const AUTH_KEY = 'shadowedge_admin_auth';
+      const AUTH_TTL_MS = 24 * 60 * 60 * 1000;
+      const FAILS_KEY = 'shadowedge_admin_fails';
+
+      async function sha256Hex(str) {
+        const data = new TextEncoder().encode(str);
+        const digest = await crypto.subtle.digest('SHA-256', data);
+        return Array.from(new Uint8Array(digest)).map((b) => b.toString(16).padStart(2, '0')).join('');
+      }
+
+      function getFails() {
+        try {
+          return JSON.parse(localStorage.getItem(FAILS_KEY)) || { count: 0, lockUntil: 0 };
+        } catch {
+          return { count: 0, lockUntil: 0 };
+        }
+      }
+
+      function setFails(fails) {
+        localStorage.setItem(FAILS_KEY, JSON.stringify(fails));
+      }
+
+      function isAuthed() {
+        const raw = localStorage.getItem(AUTH_KEY);
+        if (!raw) return false;
+        const ts = parseInt(raw, 10);
+        return !isNaN(ts) && Date.now() - ts < AUTH_TTL_MS;
+      }
+
+      let appInitialized = false;
+      function showApp() {
+        document.getElementById('authGate').classList.add('hidden');
+        document.getElementById('adminShell').classList.remove('hidden');
+        if (!appInitialized) {
+          appInitialized = true;
+          initAdminApp();
+        }
+      }
+
+      function updateGateLockUI() {
+        const fails = getFails();
+        const remaining = fails.lockUntil - Date.now();
+        const submitBtn = document.getElementById('gateSubmit');
+        const input = document.getElementById('gatePassword');
+        if (remaining > 0) {
+          submitBtn.disabled = true;
+          input.disabled = true;
+          document.getElementById('gateError').textContent = `Too many attempts. Try again in ${Math.ceil(remaining / 1000)}s.`;
+          setTimeout(updateGateLockUI, 1000);
+        } else {
+          submitBtn.disabled = false;
+          input.disabled = false;
+          if (fails.count === 0) document.getElementById('gateError').textContent = '';
+        }
+      }
+
+      async function handleGateSubmit() {
+        const fails = getFails();
+        if (fails.lockUntil > Date.now()) { updateGateLockUI(); return; }
+        const userInput = document.getElementById('gateUsername');
+        const passInput = document.getElementById('gatePassword');
+        const usernameOk = userInput.value.trim().toLowerCase() === USERNAME;
+        const hash = await sha256Hex(passInput.value);
+        if (usernameOk && hash === PASSWORD_HASH) {
+          setFails({ count: 0, lockUntil: 0 });
+          localStorage.setItem(AUTH_KEY, String(Date.now()));
+          showApp();
+        } else {
+          const count = fails.count + 1;
+          const lockSeconds = count >= 8 ? 300 : count >= 5 ? 60 : count >= 3 ? 15 : 0;
+          setFails({ count, lockUntil: lockSeconds ? Date.now() + lockSeconds * 1000 : 0 });
+          passInput.value = '';
+          passInput.focus();
+          document.getElementById('gateError').textContent = lockSeconds ? '' : 'Incorrect username or password.';
+          updateGateLockUI();
+        }
+      }
+
+      document.getElementById('gateSubmit').addEventListener('click', handleGateSubmit);
+      document.getElementById('gateUsername').addEventListener('keydown', (e) => { if (e.key === 'Enter') handleGateSubmit(); });
+      document.getElementById('gatePassword').addEventListener('keydown', (e) => { if (e.key === 'Enter') handleGateSubmit(); });
+      updateGateLockUI();
+      if (isAuthed()) {
+        showApp();
+      }
+      document.getElementById('logoutBtn').addEventListener('click', () => {
+        localStorage.removeItem(AUTH_KEY);
+        location.reload();
+      });
+      // --- End password gate ---
+
       const el = (id) => document.getElementById(id);
-      const logPane = el('logPane');
       let posts = [];
       let editingSlug = null;
       let coverFile = null;
       let slugTouched = false;
+      let logPane;
+
+      function initAdminApp() {
+      logPane = el('logPane');
 
       function log(msg, kind) {
         const line = document.createElement('div');
@@ -591,6 +707,7 @@
         loadPosts(savedToken).catch((err) => log(`Error loading posts: ${err.message}`, 'err'));
       }
       resetForm();
+      } // end initAdminApp
     </script>
   </body>
 </html>
