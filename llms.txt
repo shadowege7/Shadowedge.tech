@@ -29,5 +29,10 @@
 ## Industries
 - [Industries We Support](https://shadowedge.tech/industries): Healthcare, Finance, Legal, Professional Services, Nonprofit, Manufacturing, Automotive Dealerships, and Education.
 
+## Blog
+<!-- BLOG-LINKS-START -->
+(No posts yet.)
+<!-- BLOG-LINKS-END -->
+
 ## Other
 - [Resources](https://shadowedge.tech/resources): IT insights and guidance for business leaders.
