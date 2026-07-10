@@ -61,5 +61,10 @@
     <priority>0.8</priority>
   </url>
   <!-- BLOG-URLS-START -->
-  <!-- BLOG-URLS-END -->
+            <url>
+    <loc>https://shadowedge.tech/blog/how-to-answer-cyber-insurance-renewal-questions</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+          <!-- BLOG-URLS-END -->
 </urlset>
