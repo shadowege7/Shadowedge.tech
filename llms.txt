@@ -1,0 +1,33 @@
+# ShadowEdge Managed IT Services
+
+> ShadowEdge is a managed IT services provider (MSP) delivering managed IT support, cybersecurity, cloud and network engineering, migration and backup, VoIP, and IT consulting to growing businesses across Northern California and the San Francisco Bay Area. Phone: 916-760-4884. Email: support@shadowedge.tech.
+
+## Company
+- [Homepage](https://shadowedge.tech/): Overview of ShadowEdge's managed IT and cybersecurity services.
+- [About](https://shadowedge.tech/about): Company background, approach, and team experience.
+- [Contact](https://shadowedge.tech/contact): Phone, email, and contact form for consultations and quotes.
+
+## Services
+- [All Services](https://shadowedge.tech/services): Overview of every service offered.
+- [Managed IT Support](https://shadowedge.tech/service-managed-it-support): Help desk, endpoint management, and business technology oversight.
+- [Cybersecurity](https://shadowedge.tech/service-cybersecurity): Threat monitoring, endpoint protection, and security policy.
+- [Cloud & Network Engineering](https://shadowedge.tech/service-cloud-network): Cloud architecture, network design, and secure connectivity.
+- [Migration & Backup](https://shadowedge.tech/service-migration-backup): Planned migrations and backup strategies for continuity.
+- [Network Management](https://shadowedge.tech/service-network-management): Network performance monitoring and optimization.
+- [VoIP & Unified Communications](https://shadowedge.tech/service-voip-uc): Voice and collaboration services.
+- [IT Consulting / vCIO](https://shadowedge.tech/service-it-consulting): Fractional executive-level IT planning and roadmap development.
+- [Compliance](https://shadowedge.tech/service-compliance): HIPAA and PCI-aligned security and documentation support.
+
+## Locations
+- [All Locations](https://shadowedge.tech/locations): Overview of the service area.
+- [Northern California](https://shadowedge.tech/location-northern-ca)
+- [Sacramento, CA](https://shadowedge.tech/location-sacramento-ca)
+- [Rocklin, Roseville & Granite Bay, CA](https://shadowedge.tech/location-rocklin-roseville)
+- [Folsom & Elk Grove, CA](https://shadowedge.tech/location-folsom-elk-grove)
+- [Bay Area, CA](https://shadowedge.tech/location-bay-area)
+
+## Industries
+- [Industries We Support](https://shadowedge.tech/industries): Healthcare, Finance, Legal, Professional Services, Nonprofit, Manufacturing, Automotive Dealerships, and Education.
+
+## Other
+- [Resources](https://shadowedge.tech/resources): IT insights and guidance for business leaders.
