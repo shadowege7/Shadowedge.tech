@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Blog Admin | ShadowEdge</title>
     <meta name="robots" content="noindex,nofollow" />
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
     <link rel="stylesheet" href="assets/styles.css" />
     <style>
       body { background: var(--bg); }
@@ -328,10 +329,17 @@
         return String(str).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
       }
 
+      function safeUrl(url) {
+        const trimmed = url.trim();
+        if (/^(https?:|mailto:|tel:|\/|\.\/|\.\.\/|#)/i.test(trimmed)) return trimmed;
+        if (!/^[a-z][a-z0-9+.-]*:/i.test(trimmed)) return trimmed; // relative path, no scheme
+        return '#'; // disallowed scheme (javascript:, data:, vbscript:, etc.)
+      }
+
       function renderInline(text) {
         let out = escapeHtml(text);
-        out = out.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" />');
-        out = out.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+        out = out.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (m, alt, url) => `<img src="${safeUrl(url)}" alt="${alt}" />`);
+        out = out.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (m, label, url) => `<a href="${safeUrl(url)}">${label}</a>`);
         out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
         out = out.replace(/\*([^*]+)\*/g, '<em>$1</em>');
         return out;
@@ -386,6 +394,7 @@
     <title>${escapeHtml(post.title)} | ShadowEdge Managed IT Services</title>
     <meta name="description" content="${escapeHtml(post.excerpt)}" />
     <meta name="robots" content="index,follow" />
+    <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -398,15 +407,20 @@
     <header class="site-header">
       <div class="container nav-shell">
         <a class="brand" href="/"><img class="brand-logo" src="../assets/images/logo.svg" alt="ShadowEdge Managed IT Services" /></a>
-        <nav class="main-nav" aria-label="Primary navigation">
+        <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNav">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
+        <nav class="main-nav" id="mainNav" aria-label="Primary navigation">
           <a href="../services">Services</a>
           <a href="../about">About</a>
           <a href="../locations">Locations</a>
           <a href="../industries">Industries</a>
           <a href="../resources">Resources</a>
           <a href="../contact">Contact</a>
+          <a class="btn btn-primary nav-cta" href="../contact">Get a Quote</a>
         </nav>
-        <a class="btn btn-primary nav-cta" href="../contact">Get a Quote</a>
       </div>
     </header>
     <main class="content-page">
@@ -429,6 +443,7 @@
         <div><h3>Quick links</h3><ul><li><a href="../services">Services</a></li><li><a href="../about">About</a></li><li><a href="../resources">Resources</a></li><li><a href="../contact">Contact</a></li></ul></div>
       </div>
     </footer>
+    <script src="../assets/main.js"><\/script>
   </body>
 </html>
 `;
@@ -549,6 +564,11 @@
           log('Please fill in title, slug, date, excerpt, and body before publishing.', 'err');
           return;
         }
+        const collision = posts.find((p) => p.slug === slug);
+        if (collision && slug !== editingSlug) {
+          const proceed = confirm(`A post with the slug "${slug}" already exists ("${collision.title}"). Publishing will overwrite it. Continue?`);
+          if (!proceed) return;
+        }
         el('publishBtn').disabled = true;
         try {
           let coverImage = editingSlug ? (posts.find((p) => p.slug === editingSlug) || {}).coverImage : undefined;
@@ -565,21 +585,23 @@
 
           const post = { slug, title, date, excerpt, body, coverImage: coverImage || null };
 
-          log('Updating posts.json…');
-          const postsFile = await getFile('blog/posts.json', token);
-          const currentPosts = postsFile && postsFile.content.trim() ? JSON.parse(postsFile.content) : [];
-          const idx = currentPosts.findIndex((p) => p.slug === slug);
-          if (idx >= 0) currentPosts[idx] = post; else currentPosts.unshift(post);
-          currentPosts.sort((a, b) => (a.date < b.date ? 1 : -1));
-          await putFile('blog/posts.json', JSON.stringify(currentPosts, null, 2), `${editingSlug ? 'Update' : 'Add'} post: ${title}`, postsFile ? postsFile.sha : null, token);
-          posts = currentPosts;
-          log('posts.json updated.', 'ok');
-
+          // Write the post page itself first — if anything below fails, the post
+          // is still valid/live and a retry (idempotent) finishes the rest.
           log('Publishing post page…');
           const postHtml = renderPostPage(post);
           const existingPost = await getFile(`blog/${slug}.html`, token);
           await putFile(`blog/${slug}.html`, postHtml, `${editingSlug ? 'Update' : 'Publish'} post: ${title}`, existingPost ? existingPost.sha : null, token);
           log('Post page published.', 'ok');
+
+          log('Updating posts.json…');
+          const postsFile = await getFile('blog/posts.json', token);
+          const currentPosts = postsFile && postsFile.content.trim() ? JSON.parse(postsFile.content) : [];
+          const idx = currentPosts.findIndex((p) => p.slug === slug);
+          if (idx >= 0) currentPosts[idx] = post; else currentPosts.unshift(post);
+          currentPosts.sort((a, b) => (a.date === b.date ? 0 : a.date < b.date ? 1 : -1));
+          await putFile('blog/posts.json', JSON.stringify(currentPosts, null, 2), `${editingSlug ? 'Update' : 'Add'} post: ${title}`, postsFile ? postsFile.sha : null, token);
+          posts = currentPosts;
+          log('posts.json updated.', 'ok');
 
           log('Updating resources listing…');
           await updateManagedSection('resources.html', 'BLOG-POSTS', renderResourceCards(currentPosts), token, `Update resources listing: ${title}`);
@@ -613,6 +635,7 @@
           log(`Deleting post: ${post.title}…`);
           const updated = posts.filter((p) => p.slug !== slug);
           const postsFile = await getFile('blog/posts.json', token);
+          if (!postsFile) throw new Error('blog/posts.json not found on GitHub — nothing to delete from.');
           await putFile('blog/posts.json', JSON.stringify(updated, null, 2), `Delete post: ${post.title}`, postsFile.sha, token);
           posts = updated;
 

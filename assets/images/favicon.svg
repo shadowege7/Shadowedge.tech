@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="1220 560 560 560">
+  <defs>
+    <linearGradient id="favA" gradientUnits="userSpaceOnUse" x1="1250.4326" y1="840.083" x2="1516" y2="840.083">
+      <stop offset="0" style="stop-color:#6710D1"/>
+      <stop offset="1" style="stop-color:#C328FF"/>
+    </linearGradient>
+    <linearGradient id="favB" gradientUnits="userSpaceOnUse" x1="1349.165" y1="897.1167" x2="1628.1719" y2="897.1167">
+      <stop offset="0" style="stop-color:#6710D1"/>
+      <stop offset="1" style="stop-color:#C328FF"/>
+    </linearGradient>
+    <linearGradient id="favC" gradientUnits="userSpaceOnUse" x1="1448.1895" y1="940.2485" x2="1661.9863" y2="940.2485">
+      <stop offset="0" style="stop-color:#6710D1"/>
+      <stop offset="1" style="stop-color:#C328FF"/>
+    </linearGradient>
+    <linearGradient id="favD" gradientUnits="userSpaceOnUse" x1="1591.7412" y1="973.5" x2="1749.5674" y2="973.5">
+      <stop offset="0" style="stop-color:#6710D1"/>
+      <stop offset="1" style="stop-color:#C328FF"/>
+    </linearGradient>
+  </defs>
+  <polygon fill="url(#favA)" points="1250.433,1000 1516,680.166 1516,768.138 1323.164,1000" />
+  <polygon fill="url(#favB)" points="1349.165,1000.233 1521.191,794 1576.986,794 1628.172,843.981 1544.712,843.257 1421.04,1000.086" />
+  <polygon fill="url(#favC)" points="1448.189,1000.497 1546.988,880 1661.986,880 1623.619,926.718 1577.337,926.476 1521.468,1000.086" />
+  <polygon fill="url(#favD)" points="1591.741,1000 1635,947 1700.986,947 1749.567,1000" />
+</svg>

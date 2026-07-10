@@ -6,21 +6,31 @@
     <title>Industries We Support | ShadowEdge Managed IT Services</title>
     <meta name="description" content="ShadowEdge provides managed IT support tailored to healthcare, finance, legal, professional services, nonprofit, manufacturing, automotive dealership, and education organizations." />
     <meta name="robots" content="index,follow" />
+    <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
+    <link rel="canonical" href="https://shadowedge.tech/industries" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="assets/styles.css" />
   </head>
   <body>
     <header class="site-header">
       <div class="container nav-shell">
         <a class="brand" href="/"><img class="brand-logo" src="assets/images/logo.svg" alt="ShadowEdge Managed IT Services" /></a>
-        <nav class="main-nav" aria-label="Primary navigation">
+        <button class="nav-toggle" id="navToggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mainNav">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
+        <nav class="main-nav" id="mainNav" aria-label="Primary navigation">
           <a href="services">Services</a>
           <a href="about">About</a>
           <a href="locations">Locations</a>
           <a href="industries">Industries</a>
           <a href="resources">Resources</a>
           <a href="contact">Contact</a>
+          <a class="btn btn-primary nav-cta" href="contact">Get a Quote</a>
         </nav>
-        <a class="btn btn-primary nav-cta" href="contact">Get a Quote</a>
       </div>
     </header>
     <main class="content-page">
@@ -31,14 +41,14 @@
           <p>We tailor managed IT, security, and compliance support to the operational and regulatory needs of each industry we serve.</p>
         </header>
         <div class="card-grid">
-          <article class="card"><h2>Healthcare</h2><p>HIPAA-aligned security controls, device management, and reliable support for clinical and administrative teams.</p></article>
-          <article class="card"><h2>Finance</h2><p>PCI-aligned security practices and dependable infrastructure for firms handling sensitive financial data.</p></article>
-          <article class="card"><h2>Legal</h2><p>Confidentiality-focused IT support, secure document workflows, and responsive help desk service for legal teams.</p></article>
-          <article class="card"><h2>Professional Services</h2><p>Scalable support and cloud infrastructure for consulting, accounting, and other client-facing firms.</p></article>
-          <article class="card"><h2>Nonprofit</h2><p>Cost-conscious managed IT and cybersecurity that helps mission-driven organizations do more with limited resources.</p></article>
-          <article class="card"><h2>Manufacturing</h2><p>Network reliability, security, and technology planning for facilities with connected systems and distributed teams.</p></article>
-          <article class="card"><h2>Automotive Dealerships</h2><p>Secure, dependable IT for DMS platforms, multi-location connectivity, and customer data across sales and service departments.</p></article>
-          <article class="card"><h2>Education</h2><p>Reliable, budget-conscious IT support and security for schools and educational organizations managing students, staff, and campus systems.</p></article>
+          <article class="card"><h2>Healthcare</h2><p>HIPAA-aligned security controls, device management, and reliable support for clinical and administrative teams.</p><a href="service-compliance">Learn more</a></article>
+          <article class="card"><h2>Finance</h2><p>PCI-aligned security practices and dependable infrastructure for firms handling sensitive financial data.</p><a href="service-compliance">Learn more</a></article>
+          <article class="card"><h2>Legal</h2><p>Confidentiality-focused IT support, secure document workflows, and responsive help desk service for legal teams.</p><a href="service-cybersecurity">Learn more</a></article>
+          <article class="card"><h2>Professional Services</h2><p>Scalable support and cloud infrastructure for consulting, accounting, and other client-facing firms.</p><a href="service-cloud-network">Learn more</a></article>
+          <article class="card"><h2>Nonprofit</h2><p>Cost-conscious managed IT and cybersecurity that helps mission-driven organizations do more with limited resources.</p><a href="service-managed-it-support">Learn more</a></article>
+          <article class="card"><h2>Manufacturing</h2><p>Network reliability, security, and technology planning for facilities with connected systems and distributed teams.</p><a href="service-network-management">Learn more</a></article>
+          <article class="card"><h2>Automotive Dealerships</h2><p>Secure, dependable IT for DMS platforms, multi-location connectivity, and customer data across sales and service departments.</p><a href="service-cybersecurity">Learn more</a></article>
+          <article class="card"><h2>Education</h2><p>Reliable, budget-conscious IT support and security for schools and educational organizations managing students, staff, and campus systems.</p><a href="service-managed-it-support">Learn more</a></article>
         </div>
       </div>
     </main>
@@ -49,5 +59,6 @@
         <div><h3>Quick links</h3><ul><li><a href="services">Services</a></li><li><a href="about">About</a></li><li><a href="resources">Resources</a></li><li><a href="contact">Contact</a></li></ul></div>
       </div>
     </footer>
+    <script src="assets/main.js"></script>
   </body>
 </html>
