@@ -105,6 +105,11 @@
               <textarea id="excerptInput" rows="2" placeholder="One or two sentences summarizing the post."></textarea>
             </div>
             <div class="admin-field">
+              <label for="canonicalInput">Canonical URL (optional)</label>
+              <input type="text" id="canonicalInput" placeholder="https://original-source.com/the-article" />
+              <p class="admin-hint">Leave blank for original content. Set this only if republishing a syndicated/reprinted article, so search engines credit the original source instead of this page.</p>
+            </div>
+            <div class="admin-field">
               <label for="coverInput">Cover image (optional)</label>
               <input type="file" id="coverInput" accept="image/*" />
               <p class="admin-hint" id="coverStatus"></p>
@@ -386,6 +391,7 @@
           url: `https://shadowedge.tech/blog/${post.slug}`,
         };
         if (post.coverImage) ld.image = `https://shadowedge.tech/${post.coverImage}`;
+        const canonicalUrl = post.canonicalUrl || `https://shadowedge.tech/blog/${post.slug}`;
         return `<!DOCTYPE html>
 <html lang="en">
   <head>
@@ -395,6 +401,7 @@
     <meta name="description" content="${escapeHtml(post.excerpt)}" />
     <meta name="robots" content="index,follow" />
     <link rel="icon" type="image/svg+xml" href="../assets/images/favicon.svg" />
+    <link rel="canonical" href="${escapeHtml(canonicalUrl)}" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -528,6 +535,7 @@
         el('dateInput').value = post.date;
         el('excerptInput').value = post.excerpt;
         el('bodyInput').value = post.body;
+        el('canonicalInput').value = post.canonicalUrl || '';
         el('coverStatus').textContent = post.coverImage ? `Current cover: ${post.coverImage} (choose a new file to replace it)` : '';
         coverFile = null;
         el('publishBtn').textContent = 'Update post';
@@ -546,6 +554,7 @@
         el('dateInput').value = new Date().toISOString().slice(0, 10);
         el('excerptInput').value = '';
         el('bodyInput').value = '';
+        el('canonicalInput').value = '';
         el('coverInput').value = '';
         el('coverStatus').textContent = '';
         el('publishBtn').textContent = 'Publish post';
@@ -583,7 +592,8 @@
             log('Cover image uploaded.', 'ok');
           }
 
-          const post = { slug, title, date, excerpt, body, coverImage: coverImage || null };
+          const canonicalUrl = el('canonicalInput').value.trim();
+          const post = { slug, title, date, excerpt, body, coverImage: coverImage || null, canonicalUrl: canonicalUrl || null };
 
           // Write the post page itself first — if anything below fails, the post
           // is still valid/live and a retry (idempotent) finishes the rest.
