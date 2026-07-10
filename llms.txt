@@ -31,8 +31,8 @@
 
 ## Blog
 <!-- BLOG-LINKS-START -->
-(No posts yet.)
-<!-- BLOG-LINKS-END -->
+          - [How to Answer Cyber Insurance Renewal Questions](https://shadowedge.tech/blog/how-to-answer-cyber-insurance-renewal-questions): Cyber insurance applications have grown longer because of specific claim trends from 2023 and 2024, including the MOVEit supply-chain breach, the Change Healthcare ransomware incident, and the Arup deepfake wire fraud. Each new section asks about specific security controls including immutable backups, layered MFA, callback verification on wires, EDR or MDR coverage, vendor risk, and tested incident response. Answers that overstate your security posture can trigger rescission after a claim, meaning the policy is treated as if it never existed.
+          <!-- BLOG-LINKS-END -->
 
 ## Other
 - [Resources](https://shadowedge.tech/resources): IT insights and guidance for business leaders.
