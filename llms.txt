@@ -27,7 +27,15 @@
 - [Bay Area, CA](https://shadowedge.tech/location-bay-area)
 
 ## Industries
-- [Industries We Support](https://shadowedge.tech/industries): Healthcare, Finance, Legal, Professional Services, Nonprofit, Manufacturing, Automotive Dealerships, and Education.
+- [All Industries](https://shadowedge.tech/industries): Overview of every industry served.
+- [Healthcare](https://shadowedge.tech/industry-healthcare): HIPAA-aligned security controls, device management, and support for clinical and administrative teams.
+- [Finance](https://shadowedge.tech/industry-finance): PCI-aligned security practices and dependable infrastructure for financial data.
+- [Legal](https://shadowedge.tech/industry-legal): Confidentiality-focused IT support and secure document workflows for legal teams.
+- [Professional Services](https://shadowedge.tech/industry-professional-services): Scalable support and cloud infrastructure for consulting, accounting, and client-facing firms.
+- [Nonprofit](https://shadowedge.tech/industry-nonprofit): Cost-conscious managed IT and cybersecurity for mission-driven organizations.
+- [Manufacturing](https://shadowedge.tech/industry-manufacturing): Network reliability, security, and technology planning for connected facilities.
+- [Automotive Dealerships](https://shadowedge.tech/industry-automotive-dealerships): Secure IT for DMS platforms, multi-location connectivity, and customer data.
+- [Education](https://shadowedge.tech/industry-education): Budget-conscious IT support and security for schools and educational organizations.
 
 ## Blog
 <!-- BLOG-LINKS-START -->
