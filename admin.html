@@ -73,7 +73,7 @@
           Create a <strong>fine-grained personal access token</strong> at
           <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com/settings/personal-access-tokens/new</a>
           scoped to <strong>only this repository</strong>, with <strong>Contents: Read and write</strong> permission (nothing else needed).
-          The token is stored only in this browser (localStorage) and is never committed anywhere — treat it like a password and don't share this page or the token with anyone you don't trust with write access to the site.
+          The token is stored only in this browser (localStorage) and is never committed anywhere â€” treat it like a password and don't share this page or the token with anyone you don't trust with write access to the site.
         </p>
         <div class="admin-row" style="margin-top:0.75rem;">
           <input type="password" id="tokenInput" placeholder="github_pat_..." style="flex:1; min-width:260px; padding:0.7rem 0.85rem; border:1px solid var(--border); border-radius:0.6rem;" />
@@ -94,7 +94,7 @@
             <div class="admin-field">
               <label for="slugInput">URL slug</label>
               <input type="text" id="slugInput" placeholder="5-signs-your-business-needs-managed-it-support" />
-              <p class="admin-hint">Page will live at shadowedge.tech/blog/&lt;slug&gt;. Locked once a post is published — create a new post instead of renaming.</p>
+              <p class="admin-hint">Page will live at shadowedge.tech/blog/&lt;slug&gt;. Locked once a post is published â€” create a new post instead of renaming.</p>
             </div>
             <div class="admin-field">
               <label for="dateInput">Publish date</label>
@@ -136,7 +136,7 @@
 
       <div class="admin-panel">
         <h2>Activity log</h2>
-        <div class="admin-log" id="logPane">Waiting for action…</div>
+        <div class="admin-log" id="logPane">Waiting for actionâ€¦</div>
       </div>
 
       <div class="admin-panel">
@@ -152,7 +152,7 @@
       const BRANCH = 'main';
       const TOKEN_KEY = 'shadowedge_admin_token';
 
-      // --- Password gate (deterrent only — see admin security notes) ---
+      // --- Password gate (deterrent only â€” see admin security notes) ---
       const USERNAME = 'cody@shadowedge.tech';
       const PASSWORD_HASH = 'f930cd51434f0fede0f4a1a0e16fa88011b85850f8fad8d429c2d201f68a843f';
       const AUTH_KEY = 'shadowedge_admin_auth';
@@ -261,7 +261,7 @@
         if (kind) line.className = kind;
         const ts = new Date().toLocaleTimeString();
         line.textContent = `[${ts}] ${msg}`;
-        if (logPane.textContent === 'Waiting for action…') logPane.textContent = '';
+        if (logPane.textContent === 'Waiting for actionâ€¦') logPane.textContent = '';
         logPane.appendChild(line);
         logPane.scrollTop = logPane.scrollHeight;
       }
@@ -488,7 +488,7 @@
     </main>
     <footer class="site-footer">
       <div class="container footer-grid">
-        <div><a class="brand footer-brand" href="/"><img class="brand-logo" src="../assets/images/logo.svg" alt="ShadowEdge Managed IT Services" /></a><p>Professional IT support and strategy for growing California businesses.</p></div>
+        <div><a class="brand footer-brand" href="/"><img class="brand-logo" src="../assets/images/logo.svg" alt="ShadowEdge Managed IT Services" /></a><p>Professional IT support and strategy for growing California businesses.</p><div class="footer-social"><a href="https://www.linkedin.com/company/shadowedge" target="_blank" rel="noopener" aria-label="ShadowEdge on LinkedIn"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.8 0 0 .78 0 1.73v20.54C0 23.22.8 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .78 23.2 0 22.22 0z"/></svg></a><a href="https://www.instagram.com/shadowedgeit" target="_blank" rel="noopener" aria-label="ShadowEdge on Instagram"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07zM12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.31-1.46.72-2.13 1.38C1.35 2.68.94 3.35.63 4.14.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.79.72 1.46 1.38 2.13.67.66 1.34 1.07 2.13 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.31 1.46-.72 2.13-1.38.66-.67 1.07-1.34 1.38-2.13.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91-.31-.79-.72-1.46-1.38-2.13-.67-.66-1.34-1.07-2.13-1.38-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm7.85-10.41a1.44 1.44 0 1 1-2.88 0 1.44 1.44 0 0 1 2.88 0z"/></svg></a><a href="https://www.facebook.com/people/ShadowEdge/61591728552608/" target="_blank" rel="noopener" aria-label="ShadowEdge on Facebook"><svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07z"/></svg></a></div></div>
         <div><h3>Contact</h3><ul><li><a href="tel:9167604884">916-760-4884</a></li><li><a href="mailto:support@shadowedge.tech">support@shadowedge.tech</a></li><li>Serving Northern California, the Greater Sacramento region, and the Bay Area</li></ul></div>
         <div><h3>Quick links</h3><ul><li><a href="../services">Services</a></li><li><a href="../about">About</a></li><li><a href="../resources">Resources</a></li><li><a href="../contact">Contact</a></li></ul></div>
       </div>
@@ -625,7 +625,7 @@
         try {
           let coverImage = editingSlug ? (posts.find((p) => p.slug === editingSlug) || {}).coverImage : undefined;
           if (coverFile) {
-            log(`Uploading cover image ${coverFile.name}…`);
+            log(`Uploading cover image ${coverFile.name}â€¦`);
             const ext = coverFile.name.split('.').pop();
             const path = `assets/images/blog/${slug}/cover.${ext}`;
             const base64 = await readFileAsBase64(coverFile);
@@ -638,15 +638,15 @@
           const canonicalUrl = el('canonicalInput').value.trim();
           const post = { slug, title, date, excerpt, body, coverImage: coverImage || null, canonicalUrl: canonicalUrl || null };
 
-          // Write the post page itself first — if anything below fails, the post
+          // Write the post page itself first â€” if anything below fails, the post
           // is still valid/live and a retry (idempotent) finishes the rest.
-          log('Publishing post page…');
+          log('Publishing post pageâ€¦');
           const postHtml = renderPostPage(post);
           const existingPost = await getFile(`blog/${slug}.html`, token);
           await putFile(`blog/${slug}.html`, postHtml, `${editingSlug ? 'Update' : 'Publish'} post: ${title}`, existingPost ? existingPost.sha : null, token);
           log('Post page published.', 'ok');
 
-          log('Updating posts.json…');
+          log('Updating posts.jsonâ€¦');
           const postsFile = await getFile('blog/posts.json', token);
           const currentPosts = postsFile && postsFile.content.trim() ? JSON.parse(postsFile.content) : [];
           const idx = currentPosts.findIndex((p) => p.slug === slug);
@@ -656,15 +656,15 @@
           posts = currentPosts;
           log('posts.json updated.', 'ok');
 
-          log('Updating resources listing…');
+          log('Updating resources listingâ€¦');
           await updateManagedSection('resources.html', 'BLOG-POSTS', renderResourceCards(currentPosts), token, `Update resources listing: ${title}`);
           log('Resources listing updated.', 'ok');
 
-          log('Updating sitemap.xml…');
+          log('Updating sitemap.xmlâ€¦');
           await updateManagedSection('sitemap.xml', 'BLOG-URLS', renderSitemapEntries(currentPosts), token, `Update sitemap: ${title}`);
           log('Sitemap updated.', 'ok');
 
-          log('Updating llms.txt…');
+          log('Updating llms.txtâ€¦');
           await updateManagedSection('llms.txt', 'BLOG-LINKS', renderLlmsLinks(currentPosts), token, `Update llms.txt: ${title}`);
           log('llms.txt updated.', 'ok');
 
@@ -685,10 +685,10 @@
         if (!post) return;
         if (!confirm(`Delete "${post.title}"? This removes the live page and cannot be undone.`)) return;
         try {
-          log(`Deleting post: ${post.title}…`);
+          log(`Deleting post: ${post.title}â€¦`);
           const updated = posts.filter((p) => p.slug !== slug);
           const postsFile = await getFile('blog/posts.json', token);
-          if (!postsFile) throw new Error('blog/posts.json not found on GitHub — nothing to delete from.');
+          if (!postsFile) throw new Error('blog/posts.json not found on GitHub â€” nothing to delete from.');
           await putFile('blog/posts.json', JSON.stringify(updated, null, 2), `Delete post: ${post.title}`, postsFile.sha, token);
           posts = updated;
 
@@ -727,7 +727,7 @@
           const file = input.files[0];
           if (!file) return;
           try {
-            log(`Uploading ${file.name}…`);
+            log(`Uploading ${file.name}â€¦`);
             const ext = file.name.split('.').pop();
             const safeName = `${Date.now()}.${ext}`;
             const path = `assets/images/blog/${slug}/${safeName}`;

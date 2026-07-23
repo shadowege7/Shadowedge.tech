@@ -98,6 +98,9 @@ h2 { font-size: clamp(1.6rem, 2.5vw, 2.2rem); margin: 0 0 0.75rem; }
 .site-footer { padding: 2.5rem 0; border-top: 1px solid var(--border); background: #f0ecf9; }
 .footer-grid { display: grid; gap: 1.5rem; grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .site-footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.45rem; }
+.footer-social { display: flex; gap: 0.85rem; margin-top: 0.9rem; }
+.footer-social a { color: var(--muted); display: inline-flex; transition: color 0.2s ease; }
+.footer-social a:hover { color: var(--primary); }
 .faq-list { display: grid; gap: 1.5rem; max-width: 840px; }
 .faq-item h3 { margin: 0 0 0.4rem; }
 .faq-item p { margin: 0; color: var(--muted); }
